@@ -1,0 +1,57 @@
+.header {
+    justify-content: space-between;
+    display: flex;
+    height: 70vh;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    width: 65%;
+}
+
+.title {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.description {
+    font-size: 18px;
+}
+
+.imageContainer {
+    position: relative;
+    height: 50vh;
+    width: 30%;
+    /* margin: 25px 0; */
+}
+
+.image {
+    object-fit: cover;
+    height: auto;
+
+
+    border-radius: 15px;
+}
+
+.author {}
+
+.content {}
+
+.text {}
+
+.list li {
+    margin-top: 20px;
+    display: flex;
+}
+
+.list li h3 {
+    margin-right: 10px;
+}
+
+.price h2 {
+    color: rgb(151, 151, 47);
+}

@@ -1,0 +1,61 @@
+.heroBannerContainer {
+    padding: 100px 40px 60px 40px;
+    background-color: #dcdcdc;
+    border-radius: 15px;
+    position: relative;
+    height: auto;
+    line-height: 0.9;
+    width: 100%;
+
+}
+
+.heroBannerContainer .beatsSolo {
+    font-size: 20px;
+}
+
+.heroBannerContainer button {
+    border-radius: 15px;
+    padding: 10px 16px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    margin-top: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 10000 !important;
+}
+
+.heroBannerContainer h3 {
+    font-size: 4rem;
+    margin-top: 4px;
+}
+
+.heroBannerContainer h1 {
+    color: white;
+    font-size: 9vw;
+    margin-left: -20px;
+    text-transform: uppercase;
+}
+
+.heroBannerContainer h5 {
+    margin: 15px 0;
+    font-size: 1em;
+    text-transform: uppercase;
+
+}
+
+.desc p {
+    margin: 15px 0;
+    font-size: 1em;
+    width: 40vw;
+    line-height: 20px;
+}
+
+.heroBannerImage {
+    position: absolute;
+    top: 0%;
+    right: 6%;
+    width: 450px;
+    height: 450px;
+}
