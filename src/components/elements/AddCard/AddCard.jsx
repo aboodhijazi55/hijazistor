@@ -1,11 +1,23 @@
 "use client"
 import React from 'react'
 import styles from "../../../app/(dynamic)/products/page.module.css"
-export default function AddCard() {
+import { useCart } from "@/context/CartProvider";
+
+
+export default function AddCard({ product }) {
+    const { updateCart } = useCart();
+
+    const onAddToCartClick = () => {
+        console.log("from addCart", product);
+
+        updateCart(product, 1);
+    };
+
+
     return (
         <button
             className={styles.addCardButton}
-            onClick={() => { console.log("logout") }}
-        >Add card</button>
+            onClick={onAddToCartClick}
+        >Add to cart</button>
     )
 }

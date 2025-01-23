@@ -7,6 +7,7 @@ const nextConfig = {
             "cdn.dummyjson.com"
         ]
     }
+
 };
 
 export default nextConfig;

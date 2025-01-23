@@ -11,9 +11,9 @@ export const links = [
         url: "/products"
     },
 
-    {
-        id: 3,
-        title: "Cart",
-        url: "/cart"
-    },
+    // {
+    //     id: 3,
+    //     title: "Cart",
+    //     url: "/cart"
+    // },
 ]

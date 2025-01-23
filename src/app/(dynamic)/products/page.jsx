@@ -91,7 +91,7 @@ export default function Products() {
                             </div>
                         </Link>
                         <div className={styles.addCard} >
-                            <AddCard />
+                            <AddCard product={product} />
                             <h3 className={styles.price}>{product.price} $</h3>
                         </div>
                     </div>
