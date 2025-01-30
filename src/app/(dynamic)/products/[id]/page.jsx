@@ -6,7 +6,8 @@ import { truncateText } from '../page'
 import AddCard from '@/components/elements/AddCard/AddCard'
 
 export default async function Post({ params }) {
-    const product = data[(params.id) - 1]
+    const product = await data[(params.id) - 1]
+    console.log(product);
 
 
 
@@ -38,7 +39,7 @@ export default async function Post({ params }) {
                         <div className={styles.price}>
                             <h2>{product.price} $</h2>
                         </div>
-                        <AddCard />
+                        <AddCard product={product} />
                     </div>
 
                 </header>

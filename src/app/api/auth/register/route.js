@@ -11,9 +11,15 @@ export async function POST(req) {
             INSERT INTO users (username,email ,password)
             VALUES (${username},${email},${hashPassword})
             `
+        return NextResponse.json({ message: "success" })
     } catch (error) {
-        alert("your Email already used")
-        console.log([error]);
+        if (error.message.includes("duplicate key")) {
+            // Handle duplicate email error (assuming a unique constraint exists on email)
+            return NextResponse.json({ error: "Email already exists" }, { status: 400 });
+        }
+
+        console.error("Unexpected error:", error);
+        return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
     }
-    return NextResponse.json({ message: "success" })
 }
+

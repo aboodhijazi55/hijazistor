@@ -7,6 +7,7 @@ import Button from "../elements/Button/Button";
 import Logo from "../elements/Logo/Logo";
 import DarkMode from "../DarkMode/DarkMode";
 import SideCart from "@/app/(dynamic)/cart/SideCart";
+import { useCart } from "@/context/CartProvider";
 
 const CartIcon = ({ size, color }) => {
     return (
@@ -27,6 +28,8 @@ const CartIcon = ({ size, color }) => {
 
 export default function Navbar() {
     const [showSideCart, setShowSideCart] = useState(false);
+    const { countAllItems } = useCart()
+    const cartItems = countAllItems()
     return (
         <>
             <div className={styles.contener}>
@@ -41,11 +44,11 @@ export default function Navbar() {
                         onClick={() => setShowSideCart((old) => !old)}
                         className="bg-gray-200 p-3 w-9 h-9 flex justify-center items-center rounded-full relative">
                         <CartIcon color="#111" size={20} />
-                        {/* {cartItems > 0 ? (
-                    <div className="font-semibold absolute text-white bg-orange-600 text-xs w-6 h-6 rounded-full flex items-center justify-center -top-2 -right-2 bg-opacity-70">
-                        <p>{cartItems >= 9 ? "9+" : cartItems}</p>
-                    </div>
-                    ) : null} */}
+                        {cartItems > 0 ? (
+                            <div className="font-semibold absolute text-white bg-orange-600 text-xs w-6 h-6 rounded-full flex items-center justify-center -top-2 -right-2 bg-opacity-70">
+                                <p>{cartItems >= 9 ? "9+" : cartItems}</p>
+                            </div>
+                        ) : null}
                     </button>
 
                     <Button />

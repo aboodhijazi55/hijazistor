@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    height: 70vh;
+    justify-content: space-between;
+}
+
+.items {
+    width: 40%;
+}
+
+.container form {
+    width: 40%;
+    padding: 15px;
+}
+
+.container form button {
+    margin-top: 20px;
+}
+
+.imageContaner img {
+    height: 80px;
+    margin-right: 10px;
+}
+
+.lastContainer {
+    margin-top: auto;
+}

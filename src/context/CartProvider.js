@@ -16,78 +16,72 @@ const CartContext = createContext({
 });
 
 const CartProvider = ({ children }) => {
-    console.log("from cartprovider", children);
 
-    const [cartItems, setCartItems] = useState(["abood"]);
+    const [cartItems, setCartItems] = useState([]);
 
-    // const removeFromCart = (product) => {
-    //     const newProducts = cartItems.filter(
-    //         (item) => item.product.id !== product.id
-    //     );
-    //     setCartItems(newProducts);
-    //     updateCartInLS(newProducts);
-    // };
-
-    // const clearCart = () => {
-    //     setCartItems([]);
-    //     updateCartInLS([]);
-    // };
-
-    const updateCart = (product, qty) => {
-        // console.log("from updatCart", product)
-        // console.log("from updatCart", cartItems)
-        const finalCartItems = [...cartItems];
-        const index = cartItems.findIndex((item) => product.id === item.product.id);
-
-
-
-
-        if (index === -1) {
-            finalCartItems.push({ count: qty, product });
-
-        } else {
-            finalCartItems[index].count += qty;
-        }
-
-
-        if (finalCartItems[index]?.count === 0) {
-            removeFromCart(product);
-        } else {
-            setCartItems(finalCartItems);
-            updateCartInLS(finalCartItems);
-        }
+    const removeFromCart = (product) => {
+        const newProducts = cartItems.filter(
+            (item) => item.product.id !== product.id
+        );
+        setCartItems(newProducts);
+        updateCartInLS(newProducts);
     };
 
-    // const countAllItems = () => {
-    //     return cartItems.reduce((total, cartItem) => total + cartItem.count, 0);
-    // };
+    const clearCart = () => {
+        setCartItems([]);
+        updateCartInLS([]);
+    };
 
-    // const countTotalPrice = () => {
-    //     return cartItems
-    //         .reduce(
-    //             (total, cartItem) =>
-    //                 total + cartItem.product.price * cartItem.count,
-    //             0
-    //         )
-    //         .toFixed(2);
-    // };
 
-    // useEffect(() => {
-    //     const result = localStorage.getItem("cartItems");
-    //     if (result !== null) {
-    //         setCartItems(JSON.parse(result));
-    //     }
-    // }, []);
+    const updateCart = (product, qty) => {
+        if (!product || typeof qty !== "number" || qty === 0) return; // Early exit for invalid inputs
+
+        const updatedCartItems = [...cartItems];
+        const index = updatedCartItems.findIndex((item) => item.product.id === product.id);
+
+        if (index === -1) {
+            updatedCartItems.push({ count: qty, product });
+        } else {
+            updatedCartItems[index].count += qty;
+            if (updatedCartItems[index].count <= 0) {
+                updatedCartItems.splice(index, 1);
+            }
+        }
+        setCartItems(updatedCartItems);
+        updateCartInLS(updatedCartItems);
+    };
+
+
+    const countAllItems = () => {
+        return cartItems.reduce((total, cartItem) => total + cartItem.count, 0);
+    };
+
+    const countTotalPrice = () => {
+        return cartItems
+            .reduce(
+                (total, cartItem) =>
+                    total + cartItem.product.price * cartItem.count,
+                0
+            )
+            .toFixed(2);
+    };
+
+    useEffect(() => {
+        const result = localStorage.getItem("cartItems");
+        if (result !== null) {
+            setCartItems(JSON.parse(result));
+        }
+    }, []);
 
     return (
         <CartContext.Provider
             value={{
                 items: cartItems,
                 updateCart,
-                // removeFromCart,
-                // countTotalPrice,
-                // countAllItems,
-                // clearCart,
+                removeFromCart,
+                countTotalPrice,
+                countAllItems,
+                clearCart,
             }}
         >
             {children}

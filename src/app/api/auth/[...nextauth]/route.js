@@ -3,6 +3,8 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import { compare } from "bcrypt";
 import { neon } from '@neondatabase/serverless';
+import GoogleProvider from "next-auth/providers/google";
+
 const sql = neon(process.env.DATABASE_URL);
 
 const handler = NextAuth({
@@ -24,6 +26,7 @@ const handler = NextAuth({
                 email: {},
                 password: {}
             },
+
             async authorize(credentials, req) {
 
                 const response = await sql`
@@ -42,6 +45,10 @@ const handler = NextAuth({
                 }
                 return null
             }
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
         })
     ],
     debug: process.env.NODE_ENV === "development",

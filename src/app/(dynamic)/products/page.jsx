@@ -37,6 +37,7 @@ export default function Products() {
         }
     }, [selectedValue])
     return <>
+
         <div className={styles.categoryContainer} >
             <h2 className={styles.h2}>
                 Category
@@ -69,41 +70,38 @@ export default function Products() {
                 <label htmlFor="tv" className={styles.radioLabel}>TV</label>
             </div >
         </div>
-        <div className={styles.mainContainer}>
 
 
+        <div className={styles.mainContainer} >
             {filterValue.map(product => {
-                return <>
-                    <div className={styles.cardContainer} key={product.id}>
-                        <Link href={`/products/${product.id}`} className={styles.post} >
-                            <div className={styles.imageContainer}>
-                                <Image
-                                    className={styles.image}
-                                    src={product.image}
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    fill={true}
-                                    alt="post"
-                                />
-                            </div>
-                            <div className={styles.content}>
-                                <h1 className={styles.title}>{truncateText(product.title, 50)}</h1>
-                                <p className={styles.text}>{product.brand}</p>
-                            </div>
-                        </Link>
-                        <div className={styles.addCard} >
-                            <AddCard product={product} />
-                            <h3 className={styles.price}>{product.price} $</h3>
+                return <div className={styles.cardContainer} key={product.id}>
+                    <Link href={`/products/${product.id}`} className={styles.post} >
+                        <div className={styles.imageContainer}>
+                            <Image
+                                className={styles.image}
+                                src={product.image}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                fill={true}
+                                alt="post"
+                            />
                         </div>
+                        <div className={styles.content}>
+                            <h1 className={styles.title}>{truncateText(product.title, 50)}</h1>
+                            <p className={styles.text}>{product.brand}</p>
+                        </div>
+                        <h3 className={styles.price}>{product.price} $</h3>
+                    </Link>
+                    <div className={styles.addCard} >
+                        <AddCard product={product} />
+                        <button className={styles.showMore}>
+                            <Link href={`/products/${product.id}`}  >More Details</Link>
+                        </button>
+
                     </div>
-                </>
+                </div>
+
+
             })}
-
-
-
-
-
-
-        </div>
-
+        </div >
     </>
 }
