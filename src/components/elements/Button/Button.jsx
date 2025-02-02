@@ -21,6 +21,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Logout from "@/app/(login)/logout";
 
+
 export default function Button() {
     const { data: session, status } = useSession(); // Access session and status
 

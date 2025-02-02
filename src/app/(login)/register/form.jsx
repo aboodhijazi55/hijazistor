@@ -1,4 +1,5 @@
 'use client'
+import { signIn } from "next-auth/react"
 import styles from "./page.module.css"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -9,6 +10,7 @@ export default function Form() {
     const [alertMessage, setAlertMessage] = useState(null); // State for alert
 
     const handleSub = async (e) => {
+
         e.preventDefault()
         const formData = new FormData(e.target)
         const response = await fetch("/api/auth/register", {
@@ -25,9 +27,20 @@ export default function Form() {
         const result = await response.json();
 
         if (response.ok) {
-            router.push("/");
+            // Auto-login user after registration
+            const loginResponse = await signIn("credentials", {
+                email: formData.get("email"),
+                password: formData.get("password"),
+                redirect: false, // Prevent automatic redirection
+            });
+
+            if (!loginResponse?.error) {
+                router.push("/"); // Redirect to homepage after login
+            } else {
+                setAlertMessage("Login failed after registration. Please try to log in manually.");
+            }
         } else {
-            setAlertMessage(result.error || "Registration failed. Please try again."); // Set alert message
+            setAlertMessage(result.error || "Registration failed. Please try again.");
         }
         console.log(response);
     }

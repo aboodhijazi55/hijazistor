@@ -209,7 +209,7 @@ export default function Checkout() {
             elements,
             clientSecret,
             confirmParams: {
-                return_url: `http://www.localhost:3000/success`,
+                return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
             },
         });
 

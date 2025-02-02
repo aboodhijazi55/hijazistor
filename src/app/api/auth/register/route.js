@@ -5,7 +5,7 @@ const sql = neon(process.env.DATABASE_URL);
 export async function POST(req) {
     try {
         const { email, password, username } = await req.json()
-        console.log({ email, password, username });
+
         const hashPassword = await hash(password, 10)
         await sql`
             INSERT INTO users (username,email ,password)
